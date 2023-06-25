@@ -1,0 +1,132 @@
+openapi: "3.0.2"
+info:
+  title: "Tour Of Heroes"
+  description: "Angularのtour-of-heroesでスキーマ駆動開発してみた"
+  version: "1.0"
+servers:
+  - url: "http://localhost:3000"
+    description: "express server"
+  - url: "http://localhost:3001"
+    description: "mock server"
+
+tags:
+  - name: "heroes"
+    description: "ヒーローの操作"
+
+paths:
+  "/heroes":
+    get:
+      summary: "ヒーロー一覧の取得"
+      tags:
+        - "heroes"
+      operationId: "getHeroList"
+      deprecated: false
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Heroes"
+    post:
+      summary: "ヒーローの新規作成"
+      tags:
+        - "heroes"
+      operationId: "createHero"
+      deprecated: false
+      requestBody:
+        description: "ヒーロー情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, example: "アンパンマン" }
+                occupation: { type: string, example: "ヒーロー" }
+
+      responses:
+        "201":
+          description: "Created"
+        "400":
+          description: "Client side error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code: { type: string }
+                  type: { type: string }
+                  message: { type: string }
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field: { type: string }
+                        code: { type: string }
+
+  "/heroes/{heroId}":
+    get:
+      summary: "ヒーローの取得"
+      tags:
+        - "heroes"
+      operationId: "getHero"
+      deprecated: false
+      parameters:
+        - name: heroId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hero"
+    put:
+      summary: "ヒーローの更新"
+      tags:
+        - "heroes"
+      operationId: "updateHero"
+      deprecated: false
+      parameters:
+        - name: heroId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hero"
+    delete:
+      summary: "ヒーローの削除"
+      tags:
+        - "heroes"
+      operationId: "deleteHero"
+      deprecated: false
+      parameters:
+        - name: heroId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "204":
+          description: "Deleted"
+
+components:
+  schemas:
+    Heroes:
+      type: array
+      items:
+        $ref: "#/components/schemas/Hero"
+    Hero:
+      type: object
+      properties:
+        id: { type: string, example: "1" }
+        name: { type: string, example: "アンパンマン" }
+        occupation: { type: string, example: "ヒーロー" }
