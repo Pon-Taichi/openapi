@@ -130,3 +130,7 @@ components:
         id: { type: string, example: "1" }
         name: { type: string, example: "アンパンマン" }
         occupation: { type: string, example: "ヒーロー" }
+      required:
+        - "id"
+        - "name"
+        - occupation
