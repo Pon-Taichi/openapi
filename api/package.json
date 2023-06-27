@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "scripts": {
+    "gen:all": "npm run gen:client && npm run gen:controller",
+    "gen:client": "openapi --input openapi.yaml --output ../client/generated --client angular --useUnionTypes",
+    "gen:controller": "nswag openapi2cscontroller /namespace:TourOfHeroesApi.Controllers /input:openapi.yaml /output:../TourOfHeroesApi/TourOfHeroesApi/Controllers/GeneratedController.cs",
+    "nswag:help": "nswag help"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "nswag": "^13.19.0",
+    "openapi-typescript-codegen": "^0.24.0"
+  }
+}
