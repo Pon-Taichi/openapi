@@ -4,8 +4,8 @@ info:
   description: "Angularのtour-of-heroesでスキーマ駆動開発してみた"
   version: "1.0"
 servers:
-  - url: "http://localhost:3000"
-    description: "express server"
+  - url: "https://localhost:7030"
+    description: "dotnet server"
   - url: "http://localhost:3001"
     description: "mock server"
 
