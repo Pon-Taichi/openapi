@@ -4,7 +4,7 @@
   "scripts": {
     "gen:all": "npm run gen:client && npm run gen:controller",
     "gen:client": "openapi --input openapi.yaml --output ../client/generated --client angular --useUnionTypes",
-    "gen:controller": "nswag openapi2cscontroller /namespace:TourOfHeroesApi.Controllers /input:openapi.yaml /output:../TourOfHeroesApi/TourOfHeroesApi/Controllers/GeneratedController.cs",
+    "gen:controller": "nswag swagger2cscontroller /namespace:TourOfHeroesApi.Controllers /input:openapi.yaml /output:../TourOfHeroesApi/TourOfHeroesApi/Controllers/GeneratedController.cs /useActionResultType:true /className:Generated",
     "nswag:help": "nswag help"
   },
   "private": true,

@@ -23,7 +23,7 @@ paths:
       deprecated: false
       responses:
         "200":
-          description: "OK"
+          description: "ヒーロー一覧"
           content:
             application/json:
               schema:
@@ -40,17 +40,15 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name: { type: string, example: "アンパンマン" }
-                occupation: { type: string, example: "ヒーロー" }
-              required:
-                - "name"
-                - "occupation"
+              $ref: "#/components/schemas/CreateHeroCommand"
 
       responses:
         "201":
-          description: "Created"
+          description: "新規ヒーロー"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hero"
         "400":
           description: "Client side error"
           content:
@@ -135,5 +133,13 @@ components:
         occupation: { type: string, example: "ヒーロー" }
       required:
         - "id"
+        - "name"
+        - occupation
+    CreateHeroCommand:
+      type: object
+      properties:
+        name: { type: string, example: "アンパンマン" }
+        occupation: { type: string, example: "ヒーロー" }
+      required:
         - "name"
         - occupation

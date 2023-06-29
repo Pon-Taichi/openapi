@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type { Observable } from 'rxjs';
 
+import type { CreateHeroCommand } from '../models/CreateHeroCommand';
 import type { Hero } from '../models/Hero';
 import type { Heroes } from '../models/Heroes';
 
@@ -20,7 +21,7 @@ export class HeroesService {
 
     /**
      * ヒーロー一覧の取得
-     * @returns Heroes OK
+     * @returns Heroes ヒーロー一覧
      * @throws ApiError
      */
     public getHeroList(): Observable<Heroes> {
@@ -33,15 +34,12 @@ export class HeroesService {
     /**
      * ヒーローの新規作成
      * @param requestBody ヒーロー情報
-     * @returns any Created
+     * @returns Hero 新規ヒーロー
      * @throws ApiError
      */
     public createHero(
-        requestBody: {
-            name: string;
-            occupation: string;
-        },
-    ): Observable<any> {
+        requestBody: CreateHeroCommand,
+    ): Observable<Hero> {
         return __request(OpenAPI, this.http, {
             method: 'POST',
             url: '/heroes',
